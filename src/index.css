@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+
+    --card: 0 0% 96%;
+    --card-foreground: 0 0% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    --primary: 220 100% 43%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 6% 93%;
+    --secondary-foreground: 220 6% 20%;
+
+    --muted: 220 6% 93%;
+    --muted-foreground: 220 4% 40%;
+
+    --accent: 200 100% 64%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 6% 88%;
+    --input: 220 6% 88%;
+    --ring: 220 100% 43%;
+
+    --radius: 0.5rem;
+
+    /* Extended palette */
+    --cobalt: 209 88% 43%;
+    --legal-blue: 228 100% 64%;
+    --widget-sky: 198 100% 40%;
+    --preview-purple: 270 42% 49%;
+    --cloud-gray: 240 14% 95%;
+    --widget-dark: 0 0% 10%;
+    --banner-dark: 0 0% 9%;
+    --slate-gray: 222 4% 40%;
+    --mid-slate: 225 4% 36%;
+    --silver: 216 6% 71%;
+    --dark-slate: 216 5% 78%;
+    --warning-amber: 37 100% 34%;
+    --border-lavender: 234 12% 89%;
+    --input-border: 240 5% 85%;
+
+    --sidebar-background: 0 0% 97%;
+    --sidebar-foreground: 220 6% 20%;
+    --sidebar-primary: 220 100% 43%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 6% 93%;
+    --sidebar-accent-foreground: 220 6% 20%;
+    --sidebar-border: 220 6% 88%;
+    --sidebar-ring: 220 100% 43%;
+  }
+
+  .dark {
+    /* Expo-inspired dark design system */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 220 100% 43%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 6% 20%;
+    --secondary-foreground: 220 6% 90%;
+
+    --muted: 220 6% 15%;
+    --muted-foreground: 220 4% 55%;
+
+    --accent: 200 100% 64%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 70% 72%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 6% 22%;
+    --input: 220 6% 22%;
+    --ring: 220 100% 43%;
+
+    /* Extended palette */
+    --cobalt: 209 88% 43%;
+    --legal-blue: 228 100% 64%;
+    --widget-sky: 198 100% 64%;
+    --preview-purple: 270 42% 49%;
+    --cloud-gray: 240 14% 95%;
+    --widget-dark: 0 0% 10%;
+    --banner-dark: 0 0% 9%;
+    --slate-gray: 222 4% 40%;
+    --mid-slate: 225 4% 36%;
+    --silver: 216 6% 71%;
+    --dark-slate: 216 5% 23%;
+    --warning-amber: 37 100% 34%;
+    --border-lavender: 234 12% 89%;
+    --input-border: 240 5% 85%;
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 220 6% 90%;
+    --sidebar-primary: 220 100% 43%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 6% 15%;
+    --sidebar-accent-foreground: 220 6% 90%;
+    --sidebar-border: 220 6% 15%;
+    --sidebar-ring: 220 100% 43%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--widget-sky)), hsl(var(--legal-blue)));
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 60px -15px hsl(var(--widget-sky) / 0.2);
+  }
+}
