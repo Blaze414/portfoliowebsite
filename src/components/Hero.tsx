@@ -10,8 +10,10 @@ const Hero = () => {
         alt=""
         width={1920}
         height={1080}
-        className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover opacity-10 dark:opacity-40 pointer-events-none"
       />
+      {/* Light mode overlay for contrast */}
+      <div className="absolute inset-0 bg-background/60 dark:bg-transparent pointer-events-none" />
       {/* Subtle gradient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
@@ -30,7 +32,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-bold tracking-display leading-[1.1] mb-6"
+          className="text-5xl md:text-7xl font-bold tracking-display leading-[1.1] mb-6 text-foreground"
         >
           Al Zadid Yusuf
         </motion.h1>
