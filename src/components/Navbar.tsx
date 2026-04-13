@@ -56,7 +56,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="https://github.com/alzadid"
+            href="https://github.com/Blaze414"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors duration-200"
