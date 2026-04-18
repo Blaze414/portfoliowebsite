@@ -73,7 +73,7 @@ const projects: Project[] = [
     description:
       "Cross-platform GUI audio downloader built with PyQt6 and yt-dlp + ffmpeg. Supports 320 kbps MP3 extraction, cover-art embedding, metadata saving, playlist browsing with thumbnail previews, and configurable concurrent downloads.",
     tech: ["Python", "PyQt6", "yt-dlp", "ffmpeg"],
-    github: "https://github.com/Blaze414/YoutubeMusicUltraDownloader",
+    github: "https://github.com/Blaze414/youtube-music-ultra-downloader",
   },
   {
     title: "SRM Batch Memory Page",
