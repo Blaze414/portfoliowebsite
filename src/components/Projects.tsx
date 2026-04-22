@@ -68,6 +68,7 @@ const projects: Project[] = [
       "macOS utility app that clears Android Studio and Gradle caches in one click via shell command execution wrapped in a clean SwiftUI interface. Includes real-time status logs, error handling, and safe-removal confirmations.",
     tech: ["Swift", "SwiftUI", "Shell", "macOS"],
     github: "https://github.com/Blaze414/AndroidStudioCacheCleaner-mac",
+    demo: "https://android-studio-cache-cleaner-mac.vercel.app/"
   },
   {
     title: "YouTube Music Ultra Downloader",
