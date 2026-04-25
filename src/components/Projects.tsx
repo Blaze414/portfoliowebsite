@@ -32,6 +32,7 @@ const projects: Project[] = [
       "Responsive SPA for shelter operations with advanced search/filtering, analytics dashboard, and multi-framework implementation (React, Next.js, Vue).",
     tech: ["React", "Next.js", "Vue", "Vite"],
     github: "https://github.com/Blaze414/AnimalShelterManager-React",
+    demo: "https://animalsheltermanager-react.onrender.com"
   },
   {
     title: "Smart Home IoT Solution",
