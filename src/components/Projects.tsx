@@ -17,6 +17,7 @@ const projects: Project[] = [
       "Cross-platform Pokedex app with Gemini API integration for image recognition and PokéAPI for data. Custom animations, provider-based state management, and offline caching.",
     tech: ["Flutter", "Dart", "Gemini API", "REST"],
     github: "https://github.com/Blaze414/Pokedex",
+    demo: "https://pokedex-flutter-eight.vercel.app/",
     featured: true,
   },
   {
