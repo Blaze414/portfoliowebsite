@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, ExternalLink } from "lucide-react";
+import { Spotlight } from "./ui/spotlight";
 
 interface Certification {
   name: string;
@@ -19,29 +20,32 @@ const certifications: Certification[] = [
   { name: "Salesforce Essential Training", issuer: "LinkedIn", link: "https://www.linkedin.com/learning/certificates/344f8123c04544a4aa4ee4fb231d9debb0c0b2713b938d0b6a5a9bdb00e17f00?trk=flagship-lil_details_mobile_certification" },
 ];
 
-const sharedClass =
-  "group flex items-start gap-3 p-4 rounded-xl border border-border bg-card hover:border-primary/30 transition-colors duration-200";
-
-const CertCard = ({ cert }: { cert: Certification }) => {
+const CertCard = ({ cert, index }: { cert: Certification; index: number }) => {
   const inner = (
     <>
-      <Award className="w-4 h-4 mt-0.5 text-widget-sky shrink-0" />
-      <div className="flex-1">
+      <Spotlight size={160} />
+      <span className="relative z-10 font-mono text-[10px] text-muted-foreground/60 shrink-0 mt-0.5 tabular">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <Award className="relative z-10 w-4 h-4 mt-0.5 text-primary shrink-0" />
+      <div className="relative z-10 flex-1 min-w-0">
         <p className="text-sm font-medium text-foreground leading-snug">
           {cert.name}
         </p>
-        <p className="text-xs text-muted-foreground mt-1">{cert.issuer}</p>
+        <p className="text-xs font-mono text-muted-foreground mt-1">{cert.issuer}</p>
       </div>
-      <ExternalLink className="w-3.5 h-3.5 shrink-0 mt-0.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+      <ExternalLink className="relative z-10 w-3.5 h-3.5 shrink-0 mt-0.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
     </>
   );
 
+  const cls = "group relative overflow-hidden flex items-start gap-3 p-4 spec-card hover:border-primary/60 transition-colors duration-200";
+
   return cert.link ? (
-    <a href={cert.link} target="_blank" rel="noopener noreferrer" className={sharedClass}>
+    <a href={cert.link} target="_blank" rel="noopener noreferrer" className={cls}>
       {inner}
     </a>
   ) : (
-    <div className={sharedClass}>{inner}</div>
+    <div className={cls}>{inner}</div>
   );
 };
 
@@ -53,26 +57,24 @@ const Certifications = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="mb-16"
+        className="flex items-end justify-between gap-6 mb-16 pb-4 border-b border-border"
       >
-        <p className="font-mono text-xs text-widget-sky tracking-widest mb-3">
-          04 / CERTIFICATIONS
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold tracking-display">
-          Credentials
-        </h2>
+        <h2 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight">Credentials</h2>
+        <span className="font-mono text-xs text-muted-foreground tracking-widest mb-1 shrink-0">
+          DOC/CERTS · {String(certifications.length).padStart(2, "0")}
+        </span>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {certifications.map((cert, i) => (
           <motion.div
             key={cert.name}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.05 }}
+            transition={{ duration: 0.4, delay: i * 0.04 }}
           >
-            <CertCard cert={cert} />
+            <CertCard cert={cert} index={i} />
           </motion.div>
         ))}
       </div>

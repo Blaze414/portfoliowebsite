@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { Magnetic } from "./ui/magnetic";
 
 const navItems = [
   { label: "Projects", href: "#projects" },
@@ -32,37 +33,39 @@ const Navbar = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${
         scrolled || mobileOpen
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/90 backdrop-blur-xl border-border"
+          : "bg-background/0 border-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="text-foreground font-semibold text-lg tracking-display">
-          AZ<span className="text-widget-sky">.</span>
+        <a href="#" className="font-mono text-sm font-medium text-foreground tracking-widest">
+          AZY<span className="text-primary">.</span>01
         </a>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
+          {navItems.map((item, i) => (
             <a
               key={item.label}
               href={item.href}
               onClick={(e) => handleClick(e, item.href)}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="font-mono text-xs tracking-wide text-muted-foreground hover:text-primary transition-colors duration-200"
             >
-              {item.label}
+              {String(i + 1).padStart(2, "0")}/{item.label}
             </a>
           ))}
-          <a
-            href="https://github.com/Blaze414"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors duration-200"
-          >
-            GitHub
-          </a>
+          <Magnetic range={70} intensity={0.3}>
+            <a
+              href="https://github.com/Blaze414"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-xs font-mono px-4 py-2 border border-border text-foreground hover:border-primary hover:text-primary active:scale-[0.96] transition-[border-color,color,scale] duration-200"
+            >
+              GITHUB
+            </a>
+          </Magnetic>
           <ThemeToggle />
         </div>
 
@@ -71,7 +74,7 @@ const Navbar = () => {
           <ThemeToggle />
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="p-2 -mr-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="p-2 -mr-2 text-muted-foreground hover:text-primary transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -90,23 +93,23 @@ const Navbar = () => {
             className="md:hidden overflow-hidden border-t border-border bg-background/95 backdrop-blur-xl"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
-              {navItems.map((item) => (
+              {navItems.map((item, i) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleClick(e, item.href)}
-                  className="text-sm text-muted-foreground hover:text-foreground py-2.5 transition-colors duration-200"
+                  className="font-mono text-xs tracking-wide text-muted-foreground hover:text-primary py-2.5 transition-colors duration-200"
                 >
-                  {item.label}
+                  {String(i + 1).padStart(2, "0")}/{item.label}
                 </a>
               ))}
               <a
-                href="https://github.com/alzadid"
+                href="https://github.com/Blaze414"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm px-4 py-2 mt-2 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors duration-200 text-center"
+                className="text-xs font-mono px-4 py-2 mt-2 border border-border text-foreground hover:border-primary hover:text-primary transition-colors duration-200 text-center"
               >
-                GitHub
+                GITHUB
               </a>
             </div>
           </motion.div>

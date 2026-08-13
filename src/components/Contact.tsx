@@ -10,14 +10,14 @@ const Contact = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <p className="font-mono text-xs text-widget-sky tracking-widest mb-3">
-          05 / CONTACT
+        <p className="font-mono text-xs text-primary tracking-widest mb-3">
+          DOC/CONTACT
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold tracking-display mb-6">
+        <h2 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
           Let's Connect
         </h2>
         <p className="text-muted-foreground leading-relaxed mb-10 max-w-lg mx-auto">
-          I'm currently looking for new opportunities. Whether you have a question 
+          I'm currently looking for new opportunities. Whether you have a question
           or just want to say hi — I'd love to hear from you.
         </p>
       </motion.div>
@@ -31,7 +31,8 @@ const Contact = () => (
       >
         <a
           href="mailto:yusufalzadid@gmail.com"
-          className="flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 transition-colors duration-200"
+          className="flex items-center gap-2 px-6 py-3 bg-foreground text-background font-medium text-sm hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+          style={{ borderRadius: "2px" }}
         >
           <Mail className="w-4 h-4" />
           yusufalzadid@gmail.com
@@ -40,7 +41,8 @@ const Contact = () => (
           href="https://github.com/Blaze414"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-6 py-3 rounded-full border border-border text-foreground font-medium text-sm hover:bg-secondary transition-colors duration-200"
+          className="flex items-center gap-2 px-6 py-3 border border-border text-foreground font-medium text-sm hover:border-primary hover:text-primary transition-colors duration-200"
+          style={{ borderRadius: "2px" }}
         >
           <Github className="w-4 h-4" />
           GitHub
@@ -52,18 +54,18 @@ const Contact = () => (
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex items-center justify-center gap-2 text-sm text-slate-gray"
+        className="flex items-center justify-center gap-2 text-sm font-mono text-muted-foreground"
       >
         <MapPin className="w-3.5 h-3.5" />
-        Melbourne, VIC, Australia
+        MELBOURNE, VIC, AUSTRALIA
       </motion.div>
     </div>
 
     {/* Footer */}
     <div className="max-w-6xl mx-auto mt-24 pt-8 border-t border-border">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-gray">
-        <p>© 2026 Al Zadid Yusuf</p>
-        <p className="font-mono">Built with React + Tailwind</p>
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-muted-foreground">
+        <p>© 2026 AL ZADID YUSUF</p>
+        <p>REV 2026.08 — REACT + TAILWIND</p>
       </div>
     </div>
   </section>
