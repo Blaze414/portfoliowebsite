@@ -27,27 +27,39 @@ export function Spotlight({ size = 220, springOptions = { bounce: 0 } }: Spotlig
     setParent(containerRef.current?.parentElement ?? null);
   }, []);
 
+  // Cached instead of read fresh on every mousemove — recomputed on enter
+  // and on scroll, not on each of the dozens of move events a hover can fire.
+  const rectRef = useRef<DOMRect | null>(null);
+
   const onMove = useCallback(
     (e: MouseEvent) => {
-      if (!parent) return;
-      const rect = parent.getBoundingClientRect();
+      const rect = rectRef.current;
+      if (!rect) return;
       mouseX.set(e.clientX - rect.left);
       mouseY.set(e.clientY - rect.top);
     },
-    [parent, mouseX, mouseY]
+    [mouseX, mouseY]
   );
 
   useEffect(() => {
     if (!parent) return;
-    const enter = () => setHovered(true);
+    const refreshRect = () => {
+      rectRef.current = parent.getBoundingClientRect();
+    };
+    const enter = () => {
+      refreshRect();
+      setHovered(true);
+    };
     const leave = () => setHovered(false);
-    parent.addEventListener("mousemove", onMove);
+    parent.addEventListener("mousemove", onMove, { passive: true });
     parent.addEventListener("mouseenter", enter);
     parent.addEventListener("mouseleave", leave);
+    window.addEventListener("scroll", refreshRect, { passive: true, capture: true });
     return () => {
       parent.removeEventListener("mousemove", onMove);
       parent.removeEventListener("mouseenter", enter);
       parent.removeEventListener("mouseleave", leave);
+      window.removeEventListener("scroll", refreshRect, true);
     };
   }, [parent, onMove]);
 

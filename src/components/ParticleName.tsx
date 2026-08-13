@@ -131,10 +131,20 @@ const ParticleName = () => {
       raf = requestAnimationFrame(loop);
     };
 
+    // Cached instead of read fresh on every pointermove — this listener is
+    // global (the repel radius is small, but the hero should react the
+    // instant the cursor enters it), so recomputing the rect per event would
+    // force a synchronous layout read on every mouse move across the whole
+    // page. Refreshed on scroll/resize instead, where the position can
+    // actually change.
+    let wrapRect = wrap.getBoundingClientRect();
+    const refreshRect = () => {
+      wrapRect = wrap.getBoundingClientRect();
+    };
+
     const onMove = (e: PointerEvent) => {
-      const rect = wrap.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      mouse.x = e.clientX - wrapRect.left;
+      mouse.y = e.clientY - wrapRect.top;
     };
     const onLeave = () => {
       mouse.x = -9999;
@@ -150,11 +160,15 @@ const ParticleName = () => {
     buildTargets(); // draws itself once targets resolve
     if (!reduceMotion) {
       raf = requestAnimationFrame(loop);
-      window.addEventListener("pointermove", onMove);
-      window.addEventListener("pointerleave", onLeave);
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("pointerleave", onLeave, { passive: true });
+      window.addEventListener("scroll", refreshRect, { passive: true, capture: true });
     }
 
-    ro = new ResizeObserver(() => buildTargets());
+    ro = new ResizeObserver(() => {
+      buildTargets();
+      refreshRect();
+    });
     ro.observe(wrap);
 
     // Self-heal: once the display font actually finishes loading, rebuild
@@ -182,6 +196,7 @@ const ParticleName = () => {
       healTimers.forEach(clearTimeout);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("scroll", refreshRect, true);
     };
   }, []);
 

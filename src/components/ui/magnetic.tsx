@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, type SpringOptions } from "framer-motion";
 
 /**
  * Wraps children in a magnetic pull toward the cursor within `range`.
  * Adapted from 21st.dev/@ibelick/magnetic for this project's framer-motion setup.
+ *
+ * Listens for the cursor's approach continuously (not gated behind hover) —
+ * real magnetic pull starts before the cursor touches the element, not once
+ * it's already on top. Cheap to leave always-on: the rect is cached and only
+ * refreshed on scroll/resize, so each move is just arithmetic, no layout read.
  */
 type MagneticProps = {
   children: React.ReactNode;
@@ -25,7 +30,6 @@ export function Magnetic({
   className,
 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [hovered, setHovered] = useState(false);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -33,39 +37,44 @@ export function Magnetic({
   const springY = useSpring(y, springOptions);
 
   useEffect(() => {
-    if (!hovered) return;
+    const el = ref.current;
+    if (!el) return;
+
+    let rect = el.getBoundingClientRect();
+    const refreshRect = () => {
+      rect = el.getBoundingClientRect();
+    };
+
+    let inRange = false; // only touch the spring while something's actually happening
+
     const onMove = (e: MouseEvent) => {
-      const el = ref.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
       const dx = e.clientX - (rect.left + rect.width / 2);
       const dy = e.clientY - (rect.top + rect.height / 2);
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist <= range) {
+        inRange = true;
         const scale = 1 - dist / range;
         x.set(dx * intensity * scale);
         y.set(dy * intensity * scale);
-      } else {
+      } else if (inRange) {
+        inRange = false;
         x.set(0);
         y.set(0);
       }
     };
-    document.addEventListener("mousemove", onMove);
-    return () => document.removeEventListener("mousemove", onMove);
-  }, [hovered, intensity, range, x, y]);
+
+    document.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("scroll", refreshRect, { passive: true, capture: true });
+    window.addEventListener("resize", refreshRect, { passive: true });
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", refreshRect, true);
+      window.removeEventListener("resize", refreshRect);
+    };
+  }, [intensity, range, x, y]);
 
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => {
-        setHovered(false);
-        x.set(0);
-        y.set(0);
-      }}
-      style={{ x: springX, y: springY }}
-    >
+    <motion.div ref={ref} className={className} style={{ x: springX, y: springY }}>
       {children}
     </motion.div>
   );
