@@ -6,6 +6,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import CustomCursor from "./components/CustomCursor.tsx";
+import ScrollRuler from "./components/ScrollRuler.tsx";
+import TabTitleSwap from "./components/TabTitleSwap.tsx";
 
 const queryClient = new QueryClient();
 
@@ -13,6 +16,9 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <TooltipProvider>
+        <CustomCursor />
+        <ScrollRuler />
+        <TabTitleSwap />
         <Toaster />
         <Sonner />
         <BrowserRouter>
