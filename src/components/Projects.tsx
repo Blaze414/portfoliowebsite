@@ -29,6 +29,29 @@ const projects: Project[] = [
     featured: true,
   },
   {
+    title: "HR Onboarding",
+    description:
+      "Proof-of-concept HR platform for onboarding, courses, tasks, and document management — separate Next.js desktop workspace for HR admins and React Native mobile app for employees, sharing one Supabase backend with row-level security on every table and a full audit trail.",
+    tech: ["Next.js", "React Native", "Expo", "Supabase", "TypeScript"],
+    github: "https://github.com/Blaze414/HR-Onboarding",
+  },
+  {
+    title: "Knowledge Base",
+    description:
+      "Documentation/help-center platform where articles are typed content modules, not loose HTML — drop a Markdown folder in and it's validated at build time and indexed automatically. Fuzzy command-palette search, interactive walkthroughs, and a rate-limited support contact form.",
+    tech: ["TanStack Start", "React", "Tailwind CSS", "Fuse.js", "TypeScript"],
+    github: "https://github.com/Blaze414/knowledge-base",
+    demo: "https://knowledge-base-seven-sooty.vercel.app/",
+  },
+  {
+    title: "Blog",
+    description:
+      "Editorial/blog platform with no admin panel or database — drop a folder of article files on disk and the site validates, publishes, and rebuilds around it. In-page previews for Word/PDF/Excel documents, automatic AVIF/WebP image generation, and client-side search shipped with the bundle.",
+    tech: ["Next.js", "React", "Framer Motion", "Sharp", "TypeScript"],
+    github: "https://github.com/Blaze414/Blog",
+    demo: "https://blog-two-alpha-57.vercel.app/",
+  },
+  {
     title: "Pokedex — Flutter",
     description:
       "Cross-platform Pokedex app with Gemini API integration for image recognition and PokéAPI for data. Custom animations, provider-based state management, and offline caching.",
